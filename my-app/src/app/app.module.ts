@@ -10,6 +10,7 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { BooksService } from './services/books.service';
+import { IdService } from "./services/id.service";
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { BooksService } from './services/books.service';
     BrowserModule,
     AppRoutingModule,
   ],
-  providers: [BooksService],
+  providers: [BooksService, IdService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
