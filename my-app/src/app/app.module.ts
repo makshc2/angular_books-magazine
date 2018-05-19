@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { BooksService } from './services/books.service';
 import { IdService } from "./services/id.service";
+import { FormsModule } from "@angular/forms";
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { IdService } from "./services/id.service";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule
   ],
   providers: [BooksService, IdService],
   bootstrap: [AppComponent]

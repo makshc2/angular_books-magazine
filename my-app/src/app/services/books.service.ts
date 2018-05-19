@@ -30,7 +30,8 @@ export class BooksService {
   }
 
   getBookById(id:string) {
-
+    const  book = this.books.find(book => book.id === id);
+    return of(book);
   }
 
   addBook(book: Book) {
@@ -38,7 +39,13 @@ export class BooksService {
   }
 
   editBook(book: Book) {
-
+    this.books = this.books.map(item => {
+      if(item.id === book.id) {
+        item = book;
+      }
+      return item;
+    });
+    return of(book);
   }
 
   deleteBook(id: string){
