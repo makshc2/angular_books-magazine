@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { BooksService } from "../../services/books.service";
 import { Book } from "../../models/Book";
+import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
   selector: 'app-edit-book',
@@ -14,7 +15,8 @@ export class EditBookComponent implements OnInit {
   constructor(
     public booksService: BooksService,
     public activatedRouter: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    public flashMessage: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -25,6 +27,12 @@ export class EditBookComponent implements OnInit {
       const updateBook = Object.assign({}, this.book);
       this.booksService.editBook(updateBook).subscribe((book: Book) => {
         if(book) {
+          this.flashMessage.show('Edit book success', {
+            cssClass: 'alert-success',
+            showCloseBtn: true,
+            closeOnClick: true,
+            timeOut: 4000
+          });
           this.router.navigate(['/panel']);
         }
       })

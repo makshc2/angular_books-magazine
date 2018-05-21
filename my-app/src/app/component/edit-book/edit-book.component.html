@@ -1,39 +1,51 @@
 <div class="container">
   <div class="card card-body">
     <h2 class="card-title text-primary">Edit book: {{book.name}}</h2>
-    <form #form="ngForm" (ngSubmit)="editBook()">
+    <form #form="ngForm" (ngSubmit)="form.valid && editBook()" novalidate>
       <div class="form-group">
       <label for="name">Name</label>
       <input type="text"
              class="form-control"
              name="name"
+             [ngClass]="{'is-invalid': bookName.errors && bookName.touched}"
              [(ngModel)]="book.name"
              id="name"
              #bookName="ngModel"
              required
       >
+        <div class="invalid-feedback" [hidden]="!bookName.errors?.required">
+          Book name required
+        </div>
     </div>
       <div class="form-group">
         <label for="description">Description</label>
         <input type="text"
                class="form-control"
                name="description"
+               [ngClass]="{'is-invalid': bookDescription.errors && bookDescription.touched}"
                [(ngModel)]="book.description"
                id="description"
                #bookDescription="ngModel"
                required
         >
+        <div class="invalid-feedback" [hidden]="!bookName.errors?.required">
+          Book description required
+        </div>
       </div>
       <div class="form-group">
         <label for="author">Author</label>
         <input type="text"
                class="form-control"
                name="author"
+               [ngClass]="{'is-invalid': bookAuthor.errors && bookAuthor.touched}"
                [(ngModel)]="book.author"
                id="author"
                #bookAuthor="ngModel"
                required
         >
+        <div class="invalid-feedback" [hidden]="!bookAuthor.errors?.required">
+          Book author required
+        </div>
       </div>
       <div class="form-group" *ngFor="let link of book.link; let i = index">
         <label for="{{link.type}}">Link: {{link.type}}</label>
@@ -43,10 +55,10 @@
                [(ngModel)]="book.link[i].link"
                id="{{link.type}}"
                #book{{link.type}}="ngModel"
-               required
         >
       </div>
-      <button class="btn btn-primary">Save</button>
+      <button [disabled]="bookName.invalid || bookDescription.invalid || bookAuthor.invalid"
+              class="btn btn-primary">Save</button>
     </form>
   </div>
 </div>

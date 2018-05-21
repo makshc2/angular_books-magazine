@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { PanelComponent } from './component/panel/panel.component';
 import { AddBookComponent } from './component/add-book/add-book.component';
@@ -12,6 +11,7 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { BooksService } from './services/books.service';
 import { IdService } from "./services/id.service";
 import { FormsModule } from "@angular/forms";
+import { FlashMessagesModule } from "angular2-flash-messages";
 
 
 @NgModule({
@@ -24,10 +24,12 @@ import { FormsModule } from "@angular/forms";
     NotFoundComponent,
     NavbarComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FlashMessagesModule.forRoot()
   ],
   providers: [BooksService, IdService],
   bootstrap: [AppComponent]

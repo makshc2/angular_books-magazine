@@ -30,12 +30,13 @@ export class BooksService {
   }
 
   getBookById(id:string) {
-    const  book = this.books.find(book => book.id === id);
+    const book = this.books.find(book => book.id === id);
     return of(book);
   }
 
   addBook(book: Book) {
-
+    this.books.unshift(book);
+    return of(book);
   }
 
   editBook(book: Book) {
