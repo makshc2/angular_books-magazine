@@ -19,6 +19,9 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { environment } from "../environments/environment";
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
+import { CurrencyComponent } from './component/currency/currency.component';
+import { CurrencyService } from './services/currency.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { RegisterComponent } from './component/register/register.component';
     NotFoundComponent,
     NavbarComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CustomDatePipe,
+    CurrencyComponent
   ],
 
   imports: [
@@ -42,8 +47,9 @@ import { RegisterComponent } from './component/register/register.component';
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [BooksService, IdService, AuthService],
-  bootstrap: [AppComponent]
+  providers: [BooksService, IdService, AuthService, CurrencyService],
+  bootstrap: [AppComponent],
+  exports: [CurrencyComponent]
 })
 
 export class AppModule { }

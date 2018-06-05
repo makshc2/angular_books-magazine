@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { of } from "rxjs/observable/of";
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
 import { Book } from "../models/Book";
-import {Observable} from "rxjs/Observable";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class BooksService {
   booksCollection: AngularFirestoreCollection<Book>;
   bookDoc: AngularFirestoreDocument<Book>;
-  books: Observable<Book>;
-  book: Observable<Book[]>;
+  books: Observable<Book[]>;
+  book: Observable<Book>;
 
   constructor(
     private afs: AngularFirestore
@@ -19,38 +18,41 @@ export class BooksService {
 
   getBooks() {
     this.books = this.booksCollection.snapshotChanges().map(collection => {
-
       return collection.map(document => {
         const data = document.payload.doc.data() as Book;
         data.id = document.payload.doc.id;
+
         return data;
-        });
       });
-    return this.books
+    });
+
+    return this.books;
   }
 
-  getBookById(id:string) {
-    const book = this.books.find(book => book.id === id);
-    return of(book);
+  getBookById(id:string): Observable<Book>  {
+   this.bookDoc = this.afs.doc<Book>(`books/${id}`);
+   this.book = this.bookDoc.snapshotChanges().map(action => {
+     if(action.payload.exists === false) {
+       return null;
+     } else {
+       const data = action.payload.data() as Book;
+       data.id = action.payload.id;
+       return data;
+     }
+   });
+   return this.book;
   }
 
-  addBook(book: Book) {
-    this.books.unshift(book);
-    return of(book);
+  addBook(book) {
+    this.booksCollection.add(book);
   }
 
   editBook(book: Book) {
-    this.books = this.books.map(item => {
-      if(item.id === book.id) {
-        item = book;
-      }
-      return item;
-    });
-    return of(book);
+    return this.afs.doc(`books/${book.id}`).update(book);
   }
 
-  deleteBook(id: string){
-
+  deleteBook(book: Book) {
+    return this.afs.doc(`books/${book.id}`).delete();
   }
 
 }

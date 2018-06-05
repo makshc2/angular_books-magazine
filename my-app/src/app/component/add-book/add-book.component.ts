@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { IdService } from "../../services/id.service";
 import { BooksService } from "../../services/books.service";
-import {Book, BookLinks} from "../../models/Book";
+import { Book, BookLinks } from "../../models/Book";
 import { FlashMessagesService } from "angular2-flash-messages";
 
 
@@ -14,11 +14,12 @@ import { FlashMessagesService } from "angular2-flash-messages";
 export class AddBookComponent implements OnInit {
 
   book: Book = {
-    id: this.idServise.generate(),
     name: '',
-    author: '',
+    date: `${new Date()}`,
     description: '',
-    link: [
+    price: 0,
+    author: '',
+    links: [
       {
         type: 'epub',
         link: ''
@@ -26,7 +27,7 @@ export class AddBookComponent implements OnInit {
       {
         type: 'pdf',
         link: ''
-      },
+      }
     ]
   };
 
@@ -38,23 +39,31 @@ export class AddBookComponent implements OnInit {
     public router: Router,
     public flashMessage: FlashMessagesService,
     public idServise: IdService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
 
   }
 
   addBook() {
-    this.booksService.addBook(this.book).subscribe((book: Book) => {
-      if(book) {
-        this.flashMessage.show('New book add success', {
-          cssClass: 'alert-success',
-          showCloseBtn: true,
-          closeOnClick: true,
-          timeOut: 4000
-        });
-        this.router.navigate(['/panel']);
+    if (!this.form.valid) {
+      this.flashMessage.show('Please enter form', {
+                cssClass: 'alert-danger',
+                showCloseBtn: true,
+                closeOnClick: true,
+                timeOut: 4000
+              });
+    }else {
+      this.booksService.addBook(this.book);
+      this.flashMessage.show('New book add success', {
+                cssClass: 'alert-success',
+                showCloseBtn: true,
+                closeOnClick: true,
+                timeOut: 4000
+              });
+      this.router.navigate(['/panel']);
       }
-    });
-  }
+    }
 }
+

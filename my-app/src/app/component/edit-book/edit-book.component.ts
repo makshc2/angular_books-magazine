@@ -12,6 +12,7 @@ import { FlashMessagesService } from "angular2-flash-messages";
 export class EditBookComponent implements OnInit {
   bookId: string;
   book: Book;
+
   constructor(
     public booksService: BooksService,
     public activatedRouter: ActivatedRoute,
@@ -21,20 +22,20 @@ export class EditBookComponent implements OnInit {
 
   ngOnInit() {
     this.bookId = this.activatedRouter.snapshot.params['id'];
-    this.booksService.getBookById(this.bookId).subscribe((book: Book) => this.book = book);
+    this.booksService.getBookById(this.bookId).subscribe( (data: Book) => this.book = Object.assign({}, data));
   }
+
   editBook() {
-      const updateBook = Object.assign({}, this.book);
-      this.booksService.editBook(updateBook).subscribe((book: Book) => {
-        if(book) {
-          this.flashMessage.show('Edit book success', {
-            cssClass: 'alert-success',
-            showCloseBtn: true,
-            closeOnClick: true,
-            timeOut: 4000
-          });
-          this.router.navigate(['/panel']);
-        }
-      })
+    const updateBook = Object.assign({}, this.book);
+    this.booksService.editBook(updateBook)
+    .then(() => {
+      this.flashMessage.show('Edit book success', {
+        cssClass: 'alert-success',
+        showCloseBtn: true,
+        closeOnClick: true,
+        timeOut: 4000
+      });
+      this.router.navigate(['/panel']);
+      });
   }
 }
