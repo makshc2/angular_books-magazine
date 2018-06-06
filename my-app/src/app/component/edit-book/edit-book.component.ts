@@ -17,8 +17,7 @@ export class EditBookComponent implements OnInit {
     public booksService: BooksService,
     public activatedRouter: ActivatedRoute,
     public router: Router,
-    public flashMessage: FlashMessagesService
-  ) { }
+    public flashMessage: FlashMessagesService,) { }
 
   ngOnInit() {
     this.bookId = this.activatedRouter.snapshot.params['id'];
@@ -38,4 +37,9 @@ export class EditBookComponent implements OnInit {
       this.router.navigate(['/panel']);
       });
   }
+
+  cancel() {
+    this.router.navigate(['/panel']);
+  }
+
 }

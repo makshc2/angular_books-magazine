@@ -65,5 +65,9 @@ export class AddBookComponent implements OnInit {
       this.router.navigate(['/panel']);
       }
     }
+
+    cancel() {
+      this.router.navigate(['/panel']);
+    }
 }
 

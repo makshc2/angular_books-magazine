@@ -43,7 +43,6 @@ export class PanelComponent implements OnInit {
           closeOnClick: true,
           timeout: 4000
         });
-
         this.searchText = '';
       })
   }
