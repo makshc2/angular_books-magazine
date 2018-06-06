@@ -20,7 +20,7 @@
   <div class="row" *ngIf="!searchText">
     <div class="col-4" *ngFor="let book of books">
       <div class="card card-body">
-        <div class="card-title d-flex align-items-center">{{book.name}} <span class="badge badge-success ml-auto">{{book.price * currenctCurrency['coefficient'] | currency: currenctCurrency['name']}}</span></div>
+        <div class="card-title d-flex align-items-center">{{book.name}} <span class="badge badge-success ml-auto">{{book.price * currentCurrency['coefficient'] | currency: currentCurrency['name']}}</span></div>
         <span class="text-info">{{book.author}}</span>
         <span class="text-primary">{{book.date | customDate:"ru-RU":"short"}}</span>
         <p class="card-text">{{book.description}}</p>
