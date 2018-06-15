@@ -29,6 +29,8 @@ import { BooksService } from './services/books.service';
 import { IdService } from "./services/id.service";
 import { BasketService } from "./services/basket.service";
 import { ClientComponent } from './component/client/client.component';
+import { SalesService } from './services/sales.service';
+import { OrdersComponent } from './component/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { ClientComponent } from './component/client/client.component';
     CurrencyComponent,
     BasketComponent,
     ClientHomeComponent,
-    ClientComponent
+    ClientComponent,
+    OrdersComponent
   ],
 
   imports: [
@@ -57,7 +60,7 @@ import { ClientComponent } from './component/client/client.component';
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [BooksService, IdService, AuthService, CurrencyService, BasketService],
+  providers: [BooksService, IdService, AuthService, CurrencyService, BasketService, SalesService],
   bootstrap: [AppComponent],
   exports: [CurrencyComponent]
 })

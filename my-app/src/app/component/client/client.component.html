@@ -19,7 +19,7 @@
                min="1"
                max="100"
                [(ngModel)]="item.count"
-               (change)="onChangeItemCount(item)"
+               (click)="onChangeItemCount(item)"
         >
       </td>
       <td>{{item.sum  | currency: "USD"}}</td>
@@ -31,7 +31,7 @@
       <th>Total price:</th>
       <td></td>
       <td></td>
-      <td>{{totalPrice | currency: "USD"}}</td>
+      <td>{{totalSum | currency: "USD"}}</td>
       <td></td>
     </tr>
     </tbody>

@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { IdService } from "../../services/id.service";
+import { Router } from "@angular/router";
 import { BooksService } from "../../services/books.service";
-import { Book, BookLinks } from "../../models/Book";
+import { Book } from "../../models/Book";
 import { FlashMessagesService } from "angular2-flash-messages";
 
 
@@ -35,10 +34,8 @@ export class AddBookComponent implements OnInit {
 
   constructor(
     public booksService: BooksService,
-    public activatedRouter: ActivatedRoute,
     public router: Router,
     public flashMessage: FlashMessagesService,
-    public idServise: IdService
   ) {
   }
 

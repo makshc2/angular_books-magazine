@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BooksService } from "../../services/books.service";
 import { Book } from "../../models/Book";
 import { BasketService } from "../../services/basket.service";
+import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
   selector: 'app-client-home',
@@ -15,6 +16,7 @@ export class ClientHomeComponent implements OnInit {
   constructor(
     public bookService: BooksService,
     public basketService: BasketService,
+    public flashMessage: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -58,11 +60,18 @@ export class ClientHomeComponent implements OnInit {
     const newBasketItem = {
       id: book.id,
       price: book.price,
-      name: book.name
+      name: book.name,
+      sum: book.price,
+      count: 1
     };
 
     this.basketService.addItem(newBasketItem).subscribe(book => {
-
+      this.flashMessage.show('Add book success', {
+        cssClass: 'alert-success',
+        showCloseBtn: true,
+        closeOnClick: true,
+        timeOut: 4000
+      });
     });
   }
 
