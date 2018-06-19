@@ -76,7 +76,6 @@
     <select [(ngModel)]="order.status"
             class="form-control"
             name="status"
-            (change)="changeStatus(order)"
             [disabled]="!order.isEdit"
     >
       <option value="processing">processing</option>

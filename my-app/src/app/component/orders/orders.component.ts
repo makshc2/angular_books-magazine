@@ -26,10 +26,6 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  changeStatus(order) {
-
-  }
-
   saveChanges(order, i) {
     this.salesService.editOrder(order)
       .then(() => {

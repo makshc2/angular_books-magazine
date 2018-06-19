@@ -13,10 +13,10 @@ import { ClientComponent } from "./component/client/client.component";
 import { OrdersComponent } from "./component/orders/orders.component";
 
 const routes: Routes = [
-  { path: '', component: ClientHomeComponent },
-  { path: 'checkout', component: ClientComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: '', component: ClientHomeComponent, canActivate:[AuthGuard] },
+  { path: 'checkout', component: ClientComponent, canActivate:[AuthGuard] },
   { path: 'orders', component: OrdersComponent, canActivate:[AuthGuard] },
   { path: 'panel', component: PanelComponent, canActivate:[AuthGuard] },
   { path: 'about', component: AboutComponent, canActivate:[AuthGuard] },

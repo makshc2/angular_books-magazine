@@ -3,6 +3,7 @@ import { BasketService } from "../../services/basket.service";
 import { Router } from "@angular/router";
 import { SalesService } from "../../services/sales.service";
 import { FlashMessagesService } from "angular2-flash-messages";
+import {Book} from "../../models/Book";
 
 @Component({
   selector: 'app-client',
@@ -11,7 +12,7 @@ import { FlashMessagesService } from "angular2-flash-messages";
 })
 export class ClientComponent implements OnInit {
   checkoutList = [];
-  fullName = '';
+  name = '';
   phone = '';
   email = '';
   addressIsVisible = false;
@@ -46,7 +47,7 @@ export class ClientComponent implements OnInit {
 
   onSubmit() {
     const newOrder = {
-      name: this.fullName,
+      name: this.name,
       phone: this.phone,
       email: this.email,
       items: this.checkoutList,
